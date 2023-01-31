@@ -1,0 +1,6 @@
+.button-counter {
+  
+  display:flex;
+  font-family: 'Bungee';
+  justify-content: space-between;
+}
