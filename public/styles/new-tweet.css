@@ -90,3 +90,7 @@
 .heart:hover {
   color: burlywood;
 }
+
+#tweets-container {
+  width: 80%;
+}
