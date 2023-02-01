@@ -25,3 +25,7 @@
     flex-direction: column;
     
 }
+
+.max-char-limit {
+  color: red;
+}

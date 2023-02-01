@@ -1,8 +1,17 @@
-const { redirect } = require("express/lib/response");
+// const { redirect } = require("express/lib/response");
 
 $(document).ready(function() {
-  $( ".new-tweet form textarea" ).keyup(function() {
-    $(".new-tweet form textarea").css("color",":#1F1F1F")
-  });  
+  const counter = $(".counter")
+  $( ".new-tweet form textarea" ).on("input",function() {
+    const limit = 140;
+    const currentLength = this.value.length
+    counter.text(limit - currentLength);
+    if (currentLength > 140 ) {
+        counter.addClass("max-char-limit"); 
+    } else {
+      counter.removeClass("max-char-limit")
+    }
+  });
 });
+
 
