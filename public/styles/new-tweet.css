@@ -25,7 +25,23 @@
     flex-direction: column;
     
 }
+.article-tweet {
+  width: 150%;
+  height: 50%;
+  border: 2px solid black;
+  background-color: #f4f1ec;
+  
+}
+.article-tweet-header {
+  width: 100%;
+  background-color: #f4f1ec;
+}
 
-.max-char-limit {
+.footer hr {
+  
+}
+
+.max-char-limit {           /*char counter error color*/
   color: red;
 }
+
