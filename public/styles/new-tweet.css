@@ -1,6 +1,27 @@
 .button-counter {
   
-  display:flex;
   font-family: 'Bungee';
   justify-content: space-between;
+}
+
+.tweet-button {
+  background-color: royalblue;
+  color: white;
+}
+
+#tweet-text {
+  width: auto;
+  margin: 0;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: inherit;
+
+}
+
+.tweet-form {
+    width: 150%;
+    display: flex;
+    flex-direction: column;
+    
 }
