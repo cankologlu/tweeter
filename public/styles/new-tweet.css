@@ -69,6 +69,7 @@
 }
 .tweet-symbols {
   color: royalblue;
+  cursor: pointer;
 }
 
 .max-char-limit {           /*char counter error color*/
@@ -78,4 +79,14 @@
 .tweet-symbols {
   display: flex;
   gap: 4px;
+}
+
+.flag:hover {
+  color: burlywood;
+}
+.retweet:hover {
+  color: burlywood;
+}
+.heart:hover {
+  color: burlywood;
 }
