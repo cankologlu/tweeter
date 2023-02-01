@@ -38,7 +38,7 @@
 }
 
 .footer hr {
-  
+  height: 50;
 }
 
 .max-char-limit {           /*char counter error color*/
