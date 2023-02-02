@@ -99,7 +99,9 @@ $(document).ready(function () {
 
   $("#tweet-submit-form").submit(function (event) {
     event.preventDefault();
-    const data = $(this).serialize()
+    const data = $(this).serialize() 
+    
+
 
     if (data.length === 5 || data.length > 145) {    // Checking the input length
       return alert("Invalid tweet length!!")
