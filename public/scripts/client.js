@@ -35,7 +35,7 @@ const createTweetElement = (tweet) => {
       </p>
     </div>
   <footer class="twitter-footer">
-    <span class="tweet-date">${tweet.created_at}</span>
+    <span class="tweet-date">${timeago.format(tweet.created_at)}</span>
     <div class="tweet-symbols"> 
     <div class="flag"><i class="fa-solid fa-flag"></i></div>
     <div class="heart"><i class="fa-solid fa-heart"></i></div>
@@ -106,10 +106,18 @@ $(document).ready(function () {
   $("#tweet-submit-form").submit(function (event) {
     event.preventDefault();
     const data = $(this).serialize()
-    console.log($(this).serialize());
+    
+    if(data.length === 5 || data.length > 145) {    // Checking the input length
+      return alert("Invalid tweet length!!")
+    }
+    console.log("Serialized data is", data)
+    console.log("Serialized data length is", data.length)
 
     $.post("/tweets", data)
+
       .then(() => {
+
+        console.log("data is", data)
         console.log("Sucess");
         loadTweets();
       }) 
