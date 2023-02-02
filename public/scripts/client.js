@@ -6,17 +6,17 @@
 
 
 // Test / driver code (temporary). Eventually will get this from the server.
-const tweetData = {
-  "user": {
-    "name": "Newton",
-    "avatars": "https://i.imgur.com/73hZDYK.png",
-    "handle": "@SirIsaac"
-  },
-  "content": {
-    "text": "If I have seen further it is by standing on the shoulders of giants"
-  },
-  "created_at": 1461116232227
-}
+// const tweetData = {
+//   "user": {
+//     "name": "Newton",
+//     "avatars": "https://i.imgur.com/73hZDYK.png",
+//     "handle": "@SirIsaac"
+//   },
+//   "content": {
+//     "text": "If I have seen further it is by standing on the shoulders of giants"
+//   },
+//   "created_at": 1461116232227
+// }
 
 const createTweetElement = (tweet) => {
   const $tweetElement = `<article class="article-tweet">
@@ -30,8 +30,8 @@ const createTweetElement = (tweet) => {
     </div>
     </header>
     <div class="article-tweet-paragraph">
-      <p>
-        ${tweet.content.text}
+      <p class="tweet-paragraph">
+        
       </p>
     </div>
   <footer class="twitter-footer">
@@ -78,33 +78,36 @@ const data = [
 
 const renderTweets = (tweetsArray) => {
   for (let tweetObj of tweetsArray) {
-    let $tweet = createTweetElement(tweetObj);
+    let $tweet = $(createTweetElement(tweetObj));
+    $tweet.find(".tweet-paragraph").text(tweetObj.content.text);
     $('#tweets-container').prepend($tweet);
   }
 }
 
+const loadTweets = function () {
+  $.ajax({
+    url: "/tweets",
+    method: "get",
+  }).then(function (tweetData) {
+    $(".article-tweet").remove();
+    renderTweets(tweetData);
+  })
+}
 
 $(document).ready(function () {
 
-  renderTweets(data)
-
-  const loadTweets = function () {
-    $.ajax({
-      url: "/tweets",
-      method: "get",
-    }).then(function (tweetData) {
-      renderTweets(tweetData);
-    })
-  }
+  // renderTweets(data)
 
   $("#tweet-submit-form").submit(function (event) {
     event.preventDefault();
     const data = $(this).serialize() 
-    
-
+    let $error = $(".new-tweet h2")
+    $error.hide()
 
     if (data.length === 5 || data.length > 145) {    // Checking the input length
-      return alert("Invalid tweet length!!")
+      let $error = $(".new-tweet h2")
+      $error.slideDown("slow");
+      // return alert("Invalid tweet length!!")
     }
 
     $.post("/tweets", data)
