@@ -10,11 +10,11 @@ const tweetData = {
   "user": {
     "name": "Newton",
     "avatars": "https://i.imgur.com/73hZDYK.png",
-      "handle": "@SirIsaac"
-    },
+    "handle": "@SirIsaac"
+  },
   "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
+    "text": "If I have seen further it is by standing on the shoulders of giants"
+  },
   "created_at": 1461116232227
 }
 
@@ -43,7 +43,7 @@ const createTweetElement = (tweet) => {
     </div>
   </footer>
 </article>`
-return $tweetElement;
+  return $tweetElement;
 }
 
 const data = [
@@ -63,7 +63,8 @@ const data = [
     "user": {
       "name": "Descartes",
       "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
+      "handle": "@rd"
+    },
     "content": {
       "text": "Je pense , donc je suis"
     },
@@ -73,29 +74,55 @@ const data = [
 
 /* Event Listener*/
 
+
+
 const renderTweets = (tweetsArray) => {
-  for(let tweetObj of tweetsArray) {
-   let $tweet = createTweetElement(tweetObj);
-   $('#tweets-container').append($tweet);
-  } 
+  for (let tweetObj of tweetsArray) {
+    let $tweet = createTweetElement(tweetObj);
+    $('#tweets-container').append($tweet);
+  }
 }
 
+// const $buttonTweet = $("tweet-form").on("submit", (event) => {
+//   event.preventDefault();
 
+// });
 
 
 
 $(document).ready(function () {
-  // const $tweet = createTweetElement(tweetData);
+
   renderTweets(data)
- 
- 
-  // to add it to the page so we can make sure it's got all the right elements, classes, etc.
+
+  const loadTweets = function () {
+    $.ajax({
+      url:"/tweets", 
+      method: "get",
+    }).then(function(tweetData) {
+      renderTweets(tweetData);
+    })
+  }
+
+  $("#tweet-submit-form").submit(function (event) {
+    event.preventDefault();
+    const data = $(this).serialize()
+    console.log($(this).serialize());
+
+    $.post("/tweets", data)
+      .then(() => {
+        console.log("Sucess");
+        loadTweets();
+      }) 
+  })
+  loadTweets()
+
+
 });
 
 
 
 
-
+ // const $tweet = createTweetElement(tweetData);
 
 // $(document).ready( function () {
 //   const createTweetElement = () => {
