@@ -1,12 +1,26 @@
 .button-counter {
-  
+  display: flex;
   font-family: 'Bungee';
   justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .tweet-button {
   background-color: royalblue;
   color: white;
+  border: none;
+  font-size: 20px;
+  width: 90px;
+  height: 35px;
+  font-size: 20px;
+}
+
+.tweet-button:hover {
+  border: 3px solid #a6c0ff;
+  border-radius: 2px;
+  transition: 0.3;
+ 
 }
 
 #tweet-text {
@@ -16,6 +30,7 @@
   border-right: none;
   border-left: none;
   background-color: inherit;
+  resize: none;
 
 }
 
@@ -33,13 +48,14 @@
   margin-top: 10px;
   width: 100%;
   height: 50%;
-  border: 2px solid black;
+  border: 4px solid  #545149;;
   background-color: #f4f1ec;
   padding: 15px;
 }
 
 .article-tweet:hover {
   box-shadow: 10px 10px 8px -10px rgba(0, 0, 0, 0.8);
+  transition: 0.3s;
 }
 
 .article-tweet-header {
@@ -47,6 +63,10 @@
   background-color: #f4f1ec;
   display: flex;
   justify-content: space-between;
+}
+
+.article-tweet-paragraph {
+  word-wrap: break-word;
 }
 
 .header-user {
@@ -78,11 +98,19 @@
 
 .tweet-symbols {
   display: flex;
-  gap: 4px;
+  gap: 6px;
+  font-size: 20px;
+  margin-top: 8px;
+}
+
+.tweet-date {
+  font-size: 18px;
+  margin-top: 8px;
 }
 
 .flag:hover {
   color: burlywood;
+  
 }
 .retweet:hover {
   color: burlywood;
@@ -92,5 +120,5 @@
 }
 
 #tweets-container {
-  width: 80%;
+  width: 100%;
 }

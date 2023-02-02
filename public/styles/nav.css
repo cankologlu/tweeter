@@ -1,6 +1,4 @@
 nav {
-
-
   background-color: #4056A1;
   color: #FFFFFF;
   display: flex;
@@ -8,9 +6,8 @@ nav {
   height: 120px;
   justify-content: space-between;
   position: fixed;
-    top: 0px;
-    width: 100%;
-
+  top: 0px;
+  width: 100%;
 }
 
 .logo {
@@ -21,13 +18,14 @@ nav {
 .bold {
   font-weight: 600;
 }
+
 .newtweet {
   margin-top: 5px;
 }
 
 .icon {
   display: flex;
-    justify-content: center;
-    margin-top: -4px;
-    color: red;
+  justify-content: center;
+  margin-top: -4px;
+  color: red;
 }

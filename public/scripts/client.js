@@ -79,15 +79,9 @@ const data = [
 const renderTweets = (tweetsArray) => {
   for (let tweetObj of tweetsArray) {
     let $tweet = createTweetElement(tweetObj);
-    $('#tweets-container').append($tweet);
+    $('#tweets-container').prepend($tweet);
   }
 }
-
-// const $buttonTweet = $("tweet-form").on("submit", (event) => {
-//   event.preventDefault();
-
-// });
-
 
 
 $(document).ready(function () {
@@ -96,9 +90,9 @@ $(document).ready(function () {
 
   const loadTweets = function () {
     $.ajax({
-      url:"/tweets", 
+      url: "/tweets",
       method: "get",
-    }).then(function(tweetData) {
+    }).then(function (tweetData) {
       renderTweets(tweetData);
     })
   }
@@ -106,25 +100,18 @@ $(document).ready(function () {
   $("#tweet-submit-form").submit(function (event) {
     event.preventDefault();
     const data = $(this).serialize()
-    
-    if(data.length === 5 || data.length > 145) {    // Checking the input length
+
+    if (data.length === 5 || data.length > 145) {    // Checking the input length
       return alert("Invalid tweet length!!")
     }
-    console.log("Serialized data is", data)
-    console.log("Serialized data length is", data.length)
 
     $.post("/tweets", data)
-
       .then(() => {
-
-        console.log("data is", data)
-        console.log("Sucess");
         loadTweets();
-      }) 
+      })
+      $("#tweet-text").val("");
   })
   loadTweets()
-
-
 });
 
 
