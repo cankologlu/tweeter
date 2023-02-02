@@ -101,13 +101,19 @@ $(document).ready(function () {
   $("#tweet-submit-form").submit(function (event) {
     event.preventDefault();
     const data = $(this).serialize() 
-    let $error = $(".new-tweet h2")
-    $error.hide()
+    // let $error = $(".new-tweet h2")
+    // $error.hide()
 
     if (data.length === 5 || data.length > 145) {    // Checking the input length
-      let $error = $(".new-tweet h2")
-      $error.slideDown("slow");
-      // return alert("Invalid tweet length!!")
+      
+      $(".error-message").slideToggle( "slow", function() {
+        $(this).text( "Your tweet doesn't match the required length" );
+      }); 
+
+      return;
+      
+    } else {
+      $(".error-message").hide()
     }
 
     $.post("/tweets", data)
