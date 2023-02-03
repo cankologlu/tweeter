@@ -96,24 +96,22 @@ const loadTweets = function () {
 
 $(document).ready(function () {
 
-  // renderTweets(data)
 
   $("#tweet-submit-form").submit(function (event) {
     event.preventDefault();
-    const data = $(this).serialize() 
-    // let $error = $(".new-tweet h2")
-    // $error.hide()
+    const data = $(this).serialize();
+  
 
     if (data.length === 5 || data.length > 145) {    // Checking the input length
       
-      $(".error-message").slideToggle( "slow", function() {
+      $(".error-message").slideDown( 200, function() {
         $(this).text( "Your tweet doesn't match the required length" );
       }); 
 
       return;
       
     } else {
-      $(".error-message").hide()
+      $(".error-message").css("display","none");
     }
 
     $.post("/tweets", data)
@@ -122,22 +120,8 @@ $(document).ready(function () {
       })
       $("#tweet-text").val("");
   })
-  loadTweets()
+  loadTweets();
 });
 
-
-
-
- // const $tweet = createTweetElement(tweetData);
-
-// $(document).ready( function () {
-//   const createTweetElement = () => {
-//   $.get("/tweets", (data) => {
-//     console.log("data is back")
-//     console.log(data)
-//   });
-// }
-// createTweetElement()
-// })
 
 
