@@ -5,20 +5,8 @@
  */
 
 
-// Test / driver code (temporary). Eventually will get this from the server.
-// const tweetData = {
-//   "user": {
-//     "name": "Newton",
-//     "avatars": "https://i.imgur.com/73hZDYK.png",
-//     "handle": "@SirIsaac"
-//   },
-//   "content": {
-//     "text": "If I have seen further it is by standing on the shoulders of giants"
-//   },
-//   "created_at": 1461116232227
-// }
 
-const createTweetElement = (tweet) => {
+const createTweetElement = (tweet) => {     // Passes the object key values to jQuery object
   const $tweetElement = `<article class="article-tweet">
   <header class="article-tweet-header">
     <div class="header-user">
@@ -42,84 +30,52 @@ const createTweetElement = (tweet) => {
     <div class="retweet"><i class="fa-solid fa-retweet"></i></div>
     </div>
   </footer>
-</article>`
+</article>`;
   return $tweetElement;
-}
-
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd"
-    },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-]
-
-/* Event Listener*/
+};
 
 
-
-const renderTweets = (tweetsArray) => {
+const renderTweets = (tweetsArray) => {        // Passes the objects in the returned array to createTweetElements function
   for (let tweetObj of tweetsArray) {
     let $tweet = $(createTweetElement(tweetObj));
     $tweet.find(".tweet-paragraph").text(tweetObj.content.text);
     $('#tweets-container').prepend($tweet);
   }
-}
+};
 
-const loadTweets = function () {
+const loadTweets = function() {      // Returns tweets from url to pass render function
   $.ajax({
     url: "/tweets",
     method: "get",
-  }).then(function (tweetData) {
+  }).then(function(tweetData) {
     $(".article-tweet").remove();
     renderTweets(tweetData);
-  })
-}
+  });
+};
 
-$(document).ready(function () {
+$(document).ready(function() {
 
 
-  $("#tweet-submit-form").submit(function (event) {
+  $("#tweet-submit-form").submit(function(event) {      // Submit button event handler
     event.preventDefault();
     const data = $(this).serialize();
-  
 
-    if (data.length === 5 || data.length > 145) {    // Checking the input length
-      
-      $(".error-message").slideDown( 200, function() {
-        $(this).text( "Your tweet doesn't match the required length" );
-      }); 
 
+    if (data.length === 5 || data.length > 145) {    // Checking the input length returning error if conditions met
+
+      $(".error-message").slideDown(200, function() {
+        $(this).text("Your tweet doesn't match the required length");
+      });
       return;
-      
     } else {
-      $(".error-message").css("display","none");
+      $(".error-message").css("display", "none");
     }
-
     $.post("/tweets", data)
       .then(() => {
         loadTweets();
-      })
-      $("#tweet-text").val("");
-  })
+      });
+    $("#tweet-text").val("");
+  });
   loadTweets();
 });
 
